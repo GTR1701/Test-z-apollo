@@ -5,10 +5,10 @@ import './home.css'
 
 function Home({...props}) {
     return (
-        <>
+        <div>
             <Navbar key={101} />
             <GetUsers />
-        </>
+        </div>
         
      );
 }
