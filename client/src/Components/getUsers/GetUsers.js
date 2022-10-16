@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
-import { LOAD_USERS } from "../../GraphQL/Queries";
+import {getAllUsers} from '../../services/users-service';
 
 function GetUsers() {
-  const { error, loading, data } = useQuery(LOAD_USERS);
   const [users, setUsers] = useState([]);
-  useEffect(() => {
-    if (data) {
-      setUsers(data.getAllUsers);
-    }
-  }, [data]);
 
-  console.log(data)
+  useEffect(async () => {
+    setUsers(await getAllUsers());
+  }, []);
+
+  useEffect(() => {
+
+  }, []);
 
   return (
     <div>
       {" "}
       {users.map((val) => {
-        return <h1> {val.ID}</h1>;
+        console.log(val);
+        return <h1> {val.id}</h1>;
       })}
     </div>
   );
