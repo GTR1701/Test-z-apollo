@@ -1,27 +1,28 @@
 let mysql = require('mysql')
-class dbQuery{
-  constructor(){
-    this.con = mysql.createConnection({
-       host: "localhost",
-       user: "root",
-       password: "",
-       database: "logowanie"
-     });
 
-  }
-    
-   databaseQuery = () => { 
-      this.con.connect()
-      let temp = this.con.query("SELECT * FROM users", function (err, rows) {
-        if (err) throw err;
-        console.log(rows);
-        console.log("-------------")
-        temp = rows
-        return rows
-      });
-      this.con.end();
-      return temp
-  }
-}
+const con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "logowanie"
+});
 
-module.exports = dbQuery
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected")
+})
+
+const queryDatabase = async (connect, sql, params) => new Promise(
+  (resolve, reject) => {
+    const handleFunction = (err,result) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve(result)
+    }
+    connect.query(sql, params, handleFunction)
+  }
+)
+
+module.exports = {con, queryDatabase}

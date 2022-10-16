@@ -1,12 +1,21 @@
-const db = require('./db')
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList,} = graphql;
-let database = new db()
-let userData = []
-userData = database.databaseQuery()
+const Controller = require('./testclass')
 
-console.log("Test")
-console.log(userData.values)
+let url = 'http://localhost:6969/test/*'
+
+
+let userData
+// fetch(url)
+// .then((response) => {
+//   console.log(response.json());
+// })
+// // .then((data) => {
+  
+// // })
+// .catch(function(err) {
+//   console.log(err);
+// })
 
 const UserType = require("./TypeDefs/UserType");
 
